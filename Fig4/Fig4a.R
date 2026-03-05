@@ -8,7 +8,7 @@ library(dplyr)
 
 ################################################################################
 
-data <- read.csv('Fig4_data.csv')
+data <- read_excel('Fig4_data.xlsx', sheet = 'BIN1v1_Network')
 keyvals <- as.character(data$color)
 names(keyvals)[keyvals == '#4DAF4A'] <- 'APC/C'
 names(keyvals)[keyvals == '#E78AC3'] <- 'CLT'
