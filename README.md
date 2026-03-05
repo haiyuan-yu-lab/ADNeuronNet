@@ -10,5 +10,3 @@ This repository contains the code for data analysis and figure generation for th
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-Copyright © 2026 Yu Sun
