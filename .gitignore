@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (large files)
+*.tsv
+*.csv
+*.txt
+
+# Output images
+*.png
+*.svg
+
+# Virtual environments
+.venv/
+env/
