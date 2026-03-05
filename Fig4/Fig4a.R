@@ -22,7 +22,6 @@ names(keyvals)[keyvals == 'grey'] <- 'NS'
 
 filtered_data <- data %>% filter(color %in% c("#4DAF4A",'#FDB462'))
 label_list = c(filtered_data$Genes,'BIN1')
-
 EnhancedVolcano(data,
                 lab = data$Genes,
                 x = 'log2FC',
