@@ -1,29 +1,25 @@
 library('magrittr')
 library('ggplot2')
 library('ggrepel')
+library('readxl')
 ################################
 ##Vocanol For the log2FoldChange top10
 #load the data and then clean the data!!!
 # data <- read.csv("cleaned_a.csv", header=T)
 # print(colnames(data))
 
-data <- read.csv("ANAPC2_shc_Free_filtered_results.csv", header=T, row.names = 1)
+data <- read_excel("Fig6_data.xlsx",sheet = "ANAPC1_shc_Free_filtered_result")
 print(colnames(data))
 
 
 #to built the volcano plot for ConABvsADAB
 
-data$Genes <- rownames(data)
-print(colnames(data))
-
-#(put the gene name into the data!)
-
-order_data = data[order(data$ANAPC2_MED_log2FC, decreasing = TRUE),] %>% head(3)
+order_data = data[order(data$Log2FC, decreasing = TRUE),] %>% head(3)
 genes_select_up <- order_data$Genes
 genes_to_plot_up <- data[data$Genes %in% genes_select_up, ]
 genes_to_plot_up$Cluster <- "up"
 
-order_data = data[order(data$ANAPC2_MED_log2FC),] %>% head(3)
+order_data = data[order(data$Log2FC),] %>% head(3)
 genes_select_down <- order_data$Genes
 genes_to_plot_down <- data[data$Genes %in% genes_select_down, ]
 genes_to_plot_down$Cluster <- "down"
@@ -48,30 +44,117 @@ genes_to_plot <- genes_to_plot[!duplicated(genes_to_plot$Genes),]
 
 my_color_1 <- c("#D7301F","Grey", "#2B8CBE")
 data$colours <- c("NC")
-data$colours[data$ANAPC2_MED_log2FC > 0.5 & data$ANAPC2_p_value_adjusted <= 0.05] <- c("UP")
-data$colours[data$ANAPC2_MED_log2FC < -0.5 & data$ANAPC2_p_value_adjusted <= 0.05] <- c("DN")
+data$colours[data$Log2FC > 0.5 & data$Adjpval <= 0.05] <- c("UP")
+data$colours[data$Log2FC < -0.5 & data$Adjpval <= 0.05] <- c("DN")
 
 #Check the data charicateristic, CHr is not good for figure)
-str(data$ANAPC2_p_value_adjusted)
-sum(is.na(data$ANAPC2_p_value_adjusted))
+str(data$Adjpval)
+sum(is.na(data$Adjpval))
 #then change to Num.
-data$ANAPC2_p_value_adjusted <- as.numeric(as.character(data$ANAPC2_p_value_adjusted))
-genes_to_plot$ANAPC2_p_value_adjusted <- as.numeric(as.character(genes_to_plot$ANAPC2_p_value_adjusted))
+data$Adjpval <- as.numeric(as.character(data$Adjpval))
+genes_to_plot$Adjpval <- as.numeric(as.character(genes_to_plot$Adjpval))
 
 ##
 
 ggplot() + ylim(0,4.5) +
-  geom_point(data=data, aes(x=ANAPC2_MED_log2FC, y=-log10(ANAPC2_p_value_adjusted), colour= colours),
+  geom_point(data=data, aes(x=Log2FC, y=-log10(Adjpval), colour= colours),
              shape=19, alpha=1, size=1) +
   scale_color_manual(values = my_color_1,
                      name="DEGs",
                      breaks=rev(names(table(data$colours))),
                      labels=rev(names(table(data$colours)))) +
   geom_point(data=genes_to_plot,      #Highlights selected genes (genes_to_plot) with smaller points (size 0.5).
-             aes(x=ANAPC2_MED_log2FC, y=-log10(ANAPC2_p_value_adjusted)),
+             aes(x=Log2FC, y=-log10(Adjpval)),
              shape=19, alpha=1, size=0.5) +
   geom_text_repel(data=genes_to_plot,    #Adds text labels to the highlighted points using geom_text_repel from the ggrepel package. geom_label_repel or geom_text_repel works
-                  aes(x=ANAPC2_MED_log2FC, y=-log10(ANAPC2_p_value_adjusted), label = Genes),
+                  aes(x=Log2FC, y=-log10(Adjpval), label = Genes),
+                  color="black", fontface = 'bold',size = 2, box.padding = 0.2,
+                  point.padding = 0.5, segment.size=0.25, segment.colour="black", min.segment.length = 0.1,
+                  force = 1, max.overlaps = 20) +
+  ylab("-Log10[FDR]") + xlab("Log2FC") +
+  ggtitle("ANAPC1 sh vs Sramble")+
+  theme_bw()+
+  theme(panel.grid.major.x  = element_blank(),
+        panel.grid.major.y  = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(colour = "black", size = 1),
+        axis.text.x = element_text(colour = "black", size=15),
+        axis.text.y = element_text(colour = "black", size=15),
+        axis.title.x = element_text(colour = "black", size=15),
+        axis.title.y = element_text(colour = "black", size=15),
+        plot.title = element_text(size = 15, face = "bold")) +
+  theme(aspect.ratio = 1) +
+  scale_x_continuous(breaks=seq(-8, 8, 2), limits=c(-8,8)) +  #X axis setting
+  geom_vline(xintercept = c(-0.5, 0.5)) +
+  geom_hline(yintercept = -log10(0.05)) 
+
+
+################################
+##Vocanol For the log2FoldChange top10
+#load the data and then clean the data!!!
+# data <- read.csv("cleaned_a.csv", header=T)
+# print(colnames(data))
+
+data <- read_excel("Fig6_data.xlsx",sheet = "ANAPC2_shc_Free_filtered_result")
+print(colnames(data))
+
+
+#to built the volcano plot for ConABvsADAB
+
+order_data = data[order(data$Log2FC, decreasing = TRUE),] %>% head(3)
+genes_select_up <- order_data$Genes
+genes_to_plot_up <- data[data$Genes %in% genes_select_up, ]
+genes_to_plot_up$Cluster <- "up"
+
+order_data = data[order(data$Log2FC),] %>% head(3)
+genes_select_down <- order_data$Genes
+genes_to_plot_down <- data[data$Genes %in% genes_select_down, ]
+genes_to_plot_down$Cluster <- "down"
+
+# genes_to_plot = data[data$X %in% c('ARC','H2AFX'),] #only plot 2 genes!
+genes_to_plot <- rbind(genes_to_plot_up, genes_to_plot_down)  ## automatic selection of top and bottom of the list
+#Combined specific with tops
+
+specific_genes <- c('APOE', 'FABP3', 'TMX1', 'LIPA', 'RIDA', 'COX20', 'PLCL2', 'CPT2', 'DHRS4',
+                    'CERK', 'MRM1', 'MTX3', 'DGKE', 'SGPL1', 'TOMM34', 'PLCB1', 'STAT5B', 'NECTIN1', 'SLC25A4',
+                    'ANAPC2', 'ANAPC1', 'PLXNA3', 'EVL', 'CDK16', 'NCAM2' )
+
+
+
+specific_genes_to_plot <- data[data$Genes %in% specific_genes, ]
+specific_genes_to_plot$Cluster <- "specific"
+# Combine all genes to plot
+genes_to_plot <- rbind(genes_to_plot, specific_genes_to_plot)
+# Remove duplicates if any
+genes_to_plot <- genes_to_plot[!duplicated(genes_to_plot$Genes),]
+
+
+my_color_1 <- c("#D7301F","Grey", "#2B8CBE")
+data$colours <- c("NC")
+data$colours[data$Log2FC > 0.5 & data$Adjpval <= 0.05] <- c("UP")
+data$colours[data$Log2FC < -0.5 & data$Adjpval <= 0.05] <- c("DN")
+
+#Check the data charicateristic, CHr is not good for figure)
+str(data$Adjpval)
+sum(is.na(data$Adjpval))
+#then change to Num.
+data$Adjpval <- as.numeric(as.character(data$Adjpval))
+genes_to_plot$Adjpval <- as.numeric(as.character(genes_to_plot$Adjpval))
+
+##
+
+ggplot() + ylim(0,4.5) +
+  geom_point(data=data, aes(x=Log2FC, y=-log10(Adjpval), colour= colours),
+             shape=19, alpha=1, size=1) +
+  scale_color_manual(values = my_color_1,
+                     name="DEGs",
+                     breaks=rev(names(table(data$colours))),
+                     labels=rev(names(table(data$colours)))) +
+  geom_point(data=genes_to_plot,      #Highlights selected genes (genes_to_plot) with smaller points (size 0.5).
+             aes(x=Log2FC, y=-log10(Adjpval)),
+             shape=19, alpha=1, size=0.5) +
+  geom_text_repel(data=genes_to_plot,    #Adds text labels to the highlighted points using geom_text_repel from the ggrepel package. geom_label_repel or geom_text_repel works
+                  aes(x=Log2FC, y=-log10(Adjpval), label = Genes),
                   color="black", fontface = 'bold',size = 2, box.padding = 0.2,
                   point.padding = 0.5, segment.size=0.25, segment.colour="black", min.segment.length = 0.1,
                   force = 1, max.overlaps = 20) +
@@ -99,7 +182,7 @@ ggplot() + ylim(0,4.5) +
 #Go analysis figure
 # UP
 
-GSEA_up <- read.csv("GSEAup3groups.csv",header=T)
+GSEA_up <- read_excel("Fig6_data.xlsx",sheet = "GSEAup3groups")
 colnames(GSEA_up) <- c("name", "genes_in_gsea", "description", "genes_in_data", "k/K", "p-value", "FDR")
 GSEA_up$FDR <- as.numeric(GSEA_up$FDR)
 GSEA_up$logP <- -log10(GSEA_up$FDR)
@@ -125,9 +208,9 @@ ggplot(data=GSEA_up, aes(x=Name  , y=logP)) +
 
 
 ############
-## Change to a plot type (Down)
+## Change to a plot type ( Down)
 
-GSEA_dn <- read.csv("GSEAdown3groups.csv", header = TRUE)
+GSEA_dn <- read_excel("Fig6_data.xlsx",sheet = "GSEAdown3groups")
 colnames(GSEA_dn) <- c("name", "genes_in_gsea", "description", "genes_in_data", "k/K", "p-value", "FDR")
 
 GSEA_dn$FDR <- as.numeric(GSEA_dn$FDR)
@@ -156,3 +239,4 @@ ggplot(data = GSEA_dn, aes(x = logP, y = name)) + # Swap x and y for horizontal 
         plot.title = element_text(size = 14, face = "bold"),
         legend.position = "right") + # Position of legends
   ggtitle("Common ANAPC sh vs. Con - Down")
+
