@@ -50,9 +50,9 @@ Alzheimer’s disease (AD) is an irreversible neurodegenerative disease defined 
 
 ### `Fig6/`
 
-- **`ANAPC realted R script .R`** — Comprehensive analysis of ANAPC2 knockdown vs. scrambled control: generates a volcano plot of differentially expressed genes, a GO enrichment bar plot for upregulated genes, and a GO enrichment dot plot for downregulated genes.
+- **`Fig6_data.xlsx`** — Source data workbook containing multiple sheets: differential gene expression results (log2 fold changes, adjusted p-values) for ANAPC1 and ANAPC2 knockdown experiments, and GO enrichment results for commonly upregulated and downregulated genes.
 
-- **`ANAPC2_shc_Free_filtered_results.csv`** — Differential gene expression results (log2 fold changes, adjusted p-values) from ANAPC2 knockdown experiments. Serves as input data for the ANAPC-related R script.
+- **`Fig6.R`** — Generates four panels from `Fig6_data.xlsx`: (1) volcano plot (Fig. 6h) of differentially expressed genes for ANAPC1 knockdown vs. scrambled control, (2) volcano plot (Fig. 6h) for ANAPC2 knockdown vs. scrambled control, (3) GO enrichment bar plot (modified for Fig. S7d) for commonly upregulated genes across both ANAPC knockdowns, and (4) a GO enrichment dot plot (Fig. S7e) for commonly downregulated genes. Volcano plots highlight the top 3 up/downregulated genes and a curated set of specific genes of interest (e.g., APOE, APC/C subunits, BIN1 interactors) with labeled, repelled text annotations.
 
 ## License
 
