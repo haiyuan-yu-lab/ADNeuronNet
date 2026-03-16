@@ -1,10 +1,8 @@
-# ADNeuronNet
+# Interactome mapping in human excitatory neurons reveals novel drivers in Alzheimer's disease.
 
-This repository contains the code for data analysis and figure generation for the manuscript:
+## Authors: Xiaomu Wei, Katie Munechika, Yu Sun, Yuansong Wan, Tianyu Xia, Yuan Hou, Wenqiang Song, Kumar Yugandhar, Yiwen Wang, Se-In Lee, Zhengdong Sha, Yadi Zhou, Weixi Feng, Jingjie Zhu, Yuliang Tang, Wenjie Luo, Feixiong Cheng, Li Gan, Haiyuan Yu
 
-**"Interactome mapping in human excitatory neurons reveals novel drivers in Alzheimer's disease."**
-
-Xiaomu Wei, Katie Munechika, Yu Sun, Yuansong Wan, Tianyu Xia, Yuan Hou, Wenqiang Song, Kumar Yugandhar, Yiwen Wang, Se-In Lee, Zhengdong Sha, Yadi Zhou, Weixi Feng, Jingjie Zhu, Yuliang Tang, Wenjie Luo, Feixiong Cheng, Li Gan, Haiyuan Yu
+This repository contains the code for data analysis and figure generation for the manuscript.
 
 Preprint on [bioRxiv](https://doi.org/10.64898/2026.03.14.711835)
 
