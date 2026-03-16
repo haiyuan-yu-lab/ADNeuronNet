@@ -4,6 +4,10 @@ This repository contains the code for data analysis and figure generation for th
 
 **"Interactome mapping in human excitatory neurons reveals novel drivers in Alzheimer's disease."**
 
+Xiaomu Wei, Katie Munechika, Yu Sun, Yuansong Wan, Tianyu Xia, Yuan Hou, Wenqiang Song, Kumar Yugandhar, Yiwen Wang, Se-In Lee, Zhengdong Sha, Yadi Zhou, Weixi Feng, Jingjie Zhu, Yuliang Tang, Wenjie Luo, Feixiong Cheng, Li Gan, Haiyuan Yu
+
+Preprint on [bioRxiv](https://doi.org/10.64898/2026.03.14.711835)
+
 Developed by [Yu Sun](https://github.com/YuSun795) and [Tianyu Xia](https://github.com/TianyuXia123) form Haiyuan Yu's Lab.
 
 ## Project Abstract
