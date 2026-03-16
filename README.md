@@ -1,6 +1,6 @@
 # Interactome mapping in human excitatory neurons reveals novel drivers in Alzheimer's disease.
 
-## Authors: Xiaomu Wei, Katie Munechika, Yu Sun, Yuansong Wan, Tianyu Xia, Yuan Hou, Wenqiang Song, Kumar Yugandhar, Yiwen Wang, Se-In Lee, Zhengdong Sha, Yadi Zhou, Weixi Feng, Jingjie Zhu, Yuliang Tang, Wenjie Luo, Feixiong Cheng, Li Gan, Haiyuan Yu
+### Xiaomu Wei, Katie Munechika, Yu Sun, Yuansong Wan, Tianyu Xia, Yuan Hou, Wenqiang Song, Kumar Yugandhar, Yiwen Wang, Se-In Lee, Zhengdong Sha, Yadi Zhou, Weixi Feng, Jingjie Zhu, Yuliang Tang, Wenjie Luo, Feixiong Cheng, Li Gan, Haiyuan Yu
 
 This repository contains the code for data analysis and figure generation for the manuscript.
 
